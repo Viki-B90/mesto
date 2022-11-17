@@ -4,8 +4,8 @@ const popupOpenButtonElement = document.querySelector('.profile__edit');
 
 const openPopup = function () {
   popupElement.classList.add('popup_opened');
-  profileName.textContent = userName.value;
-  profileInfo.textContent = userInfo.value;
+  userName.value = profileName.textContent;
+  userInfo.value = profileInfo.textContent;
 }
 
 const closePopup = function () {
