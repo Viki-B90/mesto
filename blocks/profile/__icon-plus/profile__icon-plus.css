@@ -5,7 +5,7 @@
   object-position: center;
 }
 
-@media screen and (max-width: 568px) {
+@media screen and (max-width: 613px) {
   .profile__icon-plus {
     background-size: 16px;
     width: 16px;

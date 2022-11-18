@@ -12,9 +12,15 @@
   opacity: .6;
 }
 
+@media screen and (max-width: 1164px) {
+  .profile__add {
+    margin-left: 100px;
+  }
+}
+
 @media screen and (max-width: 985px) {
   .profile__add {
-    margin-left: 220px;
+    margin-left: 70px;
   }
 }
 
