@@ -8,15 +8,8 @@
   gap: 20px 17px;
 }
 
-@media screen and (max-width: 1165px) {
-  .elements {
-    margin-left: 50px;
-  }
-}
-
 @media screen and (max-width: 1080px) {
   .elements {
-    margin-left: 50px;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(3, 1fr);
     column-gap: 20px;
@@ -26,15 +19,8 @@
 @media screen and (max-width: 693px) {
   .elements {
     margin-top: 36px;
-    margin-left: 100px;
     grid-template-columns: repeat(1, 1fr);
     grid-template-rows: repeat(6, 1fr);
     row-gap: 20px;
-  }
-}
-
-@media screen and (max-width: 430px) {
-  .elements {
-    margin-left: 19px;
   }
 }

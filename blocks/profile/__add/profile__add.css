@@ -6,6 +6,7 @@
   width: 150px;
   height: 50px;
   cursor: pointer;
+  max-width: 394px;
 }
 
 .profile__add:hover {
@@ -14,14 +15,8 @@
 
 @media screen and (max-width: 1164px) {
   .profile__add {
-    margin-left: 100px;
+    margin-left: 150px;
     margin-right: 0;
-  }
-}
-
-@media screen and (max-width: 985px) {
-  .profile__add {
-    margin-left: 70px;
   }
 }
 

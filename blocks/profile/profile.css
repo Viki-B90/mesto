@@ -8,15 +8,15 @@
 
 @media screen and (max-width: 1164px) {
   .profile {
+    justify-content: center;
     margin-left: 100px;
   }
 }
 
-@media screen and (max-width: 985px) {
+@media screen and (max-width: 948px) {
   .profile {
     grid-template-columns: 120px 1fr;
     grid-template-rows: 120px 1fr;
-    margin-left: 50px;
   }
 }
 
@@ -25,12 +25,6 @@
     grid-template-columns: minmax(min-content, max-content);
     grid-template-rows: 1fr minmax(min-content, max-content) minmax(min-content, max-content);
     margin-top: 42px;
-    margin-left: 20px;
-  }
-}
-
-@media screen and (max-width: 322px) {
-  .profile {
-    margin-left: 18px;
+    margin-left: 0;
   }
 }
