@@ -7,4 +7,5 @@
   overflow: hidden;
   min-width: 282px;
   min-height: 361px;
+  position: relative;
 }

@@ -27,64 +27,52 @@
       </button>
     </section>
     <section class="elements">
-      <article class="element">
-        <img class="element__image" src="./images/baikal.jpg" alt="Байкал">
-        <div class="element__group">
-          <h2 class="element__title">Байкал</h2>
-          <button class="element__like" type="button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img class="element__image" src="./images/eolova_arpha.jpg" alt="Пятигорск">
-        <div class="element__group">
-          <h2 class="element__title">Пятигорск</h2>
-          <button class="element__like" type="button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img class="element__image" src="./images/island_olhon.jpg" alt="Остров Ольхон">
-        <div class="element__group">
-          <h2 class="element__title">Остров Ольхон</h2>
-          <button class="element__like" type="button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img class="element__image" src="./images/karmadon.jpg" alt="Кармадонское ущелье">
-        <div class="element__group">
-          <h2 class="element__title">Кармадонское ущелье</h2>
-          <button class="element__like" type="button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img class="element__image" src="./images/lago_naki.jpg" alt="Плато Лаго-Наки">
-        <div class="element__group">
-          <h2 class="element__title">Плато Лаго-Наки</h2>
-          <button class="element__like" type="button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img class="element__image" src="./images/sulakski_canyon.jpg" alt="Сулакский каньон">
-        <div class="element__group">
-          <h2 class="element__title">Сулакский каньон</h2>
-          <button class="element__like" type="button"></button>
-        </div>
-      </article>
+      <ul class="elements__list">
+      </ul>
     </section>
   </main>
   <footer class="footer">
     <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
   </footer>
-  <section class="popup">
-    <div class="popup__container">
-      <button class="popup__close" type="button"></button>
-      <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__form" name="aboutUser">
-        <input type="text" class="popup__input popup__input_type_name" name="aboutUser" placeholder="Имя">
-        <input type="text" class="popup__input popup__input_type_info" name="aboutUser" placeholder="Вид занятий">  
-        <button class="popup__save" type="submit">Сохранить</button>
-      </form> 
-    </div>
-  </section>
+    <section class="popup popup__edit-profile">
+      <div class="popup__container">
+        <button class="popup__close" type="button"></button>
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <form class="popup__form" name="aboutUser">
+          <input type="text" class="popup__input popup__input_type_name" name="aboutUser" placeholder="Имя">
+          <input type="text" class="popup__input popup__input_type_info" name="aboutUser" placeholder="Вид занятий">  
+          <button class="popup__save" type="submit">Сохранить</button>
+        </form> 
+      </div>
+    </section>
+    <section class="popup popup__add-card">
+      <div class="popup__container">
+        <button class="popup__close" type="button"></button>
+        <h2 class="popup__title">Новое место</h2>
+        <form class="popup__form popup__form_new_place" name="newPlace">
+          <input type="text" class="popup__input popup__input_type_title" name="newPlace" placeholder="Название">
+          <input type="text" class="popup__input popup__input_type_link" name="newPlace" placeholder="Ссылка на картинку">  
+          <button class="popup__save popup__save_new_place" type="submit">Создать</button>
+        </form> 
+      </div>
+    </section>
+    <section class="popup popup__open-image">
+     <div class="popup__container-image">
+        <button class="popup__close" type="button"></button>
+        <img class="popup__image" name="image" src="#" alt="#">
+        <h3 class="popup__title-image"></h3>
+      </div>
+    </section>
+    <template id="card-template">
+      <li class="element">
+        <img class="element__image" src="#" alt="#">
+        <button class="element__delete" type="button"></button>
+        <div class="element__group">
+          <h2 class="element__title"></h2>
+          <button class="element__like" type="button"></button>
+        </div>
+      </li>
+    </template>
   <script src="./scripts/index.js"></script>
 </body>
 </html>
