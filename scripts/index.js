@@ -1,6 +1,6 @@
 // Объявляем переменные
 const popupElement = document.querySelector('.popup');
-const popupEdit = document.querySelector('.popup__edit');
+const popupEdit = document.querySelector('.popup_edit');
 const popupEditCloseButton = document.querySelector('.popup__close');
 const popupEditOpenButton = document.querySelector('.profile__edit');
 const formEdit = document.querySelector('.popup__form');
@@ -8,10 +8,10 @@ const userName = document.querySelector('.popup__input_type_name');
 const userInfo = document.querySelector('.popup__input_type_info');
 const profileName = document.querySelector('.profile__info_type_name');
 const profileInfo = document.querySelector('.profile__info_type_about-me');
-const popupAdd = document.querySelector('.popup__add');
+const popupAdd = document.querySelector('.popup_add');
 const popupAddOpenButton = document.querySelector('.profile__add');
 const popupAddCloseButton = popupAdd.querySelector('.popup__close');
-const popupImage = document.querySelector('.popup__img');
+const popupImage = document.querySelector('.popup_img');
 const popupImageContainer = document.querySelector('.popup__container-image');
 const openBigImage = document.querySelector('.popup__image');
 const nameBigImage = document.querySelector('.popup__title-image');
