@@ -13,23 +13,25 @@ const popupAddOpenButton = document.querySelector('.profile__add');
 const popupAddCloseButton = popupAdd.querySelector('.popup__close');
 const popupImage = document.querySelector('.popup_img');
 const popupImageContainer = document.querySelector('.popup__container-image');
-const openBigImage = document.querySelector('.popup__image');
+const elementBigImage = document.querySelector('.popup__image');
 const nameBigImage = document.querySelector('.popup__title-image');
 const popupImageCloseButton = popupImage.querySelector('.popup__close');
 const formAdd = document.querySelector('.popup__form_new_place');
-const addTitle = document.querySelector('.popup__input_type_title');
-const addLink = document.querySelector('.popup__input_type_link');
-const cardsList = document.querySelector('.elements__list');
+const cardTitle = document.querySelector('.popup__input_type_title');
+const cardLink = document.querySelector('.popup__input_type_link');
+const cardsContainer = document.querySelector('.elements__list');
 const cardTemplate = document.querySelector('#card-template').content.querySelector('.element');
 const popupCreateCard = popupAdd.querySelector('.popup__save_new_place');
 
 // Функция открытия 3х попапов
 const openPopup = function (popup) {
   popup.classList.add('popup_opened');
-   
+}
+
+function openPropfilePopup() { 
   userName.value = profileName.textContent;
   userInfo.value = profileInfo.textContent;
-}
+} 
 
 // Функция закрытия 3х попапов
 const closePopup = function (popup) {
@@ -39,6 +41,7 @@ const closePopup = function (popup) {
 // Обработчики открытия попапов
 popupEditOpenButton.addEventListener('click', function() {
   openPopup(popupEdit);
+  openPropfilePopup();
 });
 popupAddOpenButton.addEventListener('click', function() {
   openPopup(popupAdd);
@@ -67,38 +70,10 @@ const handleFormEditSubmit = (event) => {
 //Обрабочик кнопки Сохранить
 formEdit.addEventListener('submit', handleFormEditSubmit);
 
-// Массив карточек
-const initialCards = [
-  {
-    name: 'Сулакский каньон',
-    link: './images/sulakskij-kanon.jpg'
-  },
-  {
-    name: 'Плато Лаго-Наки',
-    link: './images/lago_naki.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: './images/kamchatka.jpeg'
-  },
-  {
-    name: 'Остров Ольхон',
-    link: './images/island_olhon.jpeg'
-  },
-  {
-    name: 'Пятигорск',
-    link: './images/eolova_arpha.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: './images/baikal.jpg'
-  }
-]; 
-
 const openCardPopup = function (dataCard) {
   nameBigImage.textContent = dataCard.name;
-  openBigImage.alt = dataCard.name;
-  openBigImage.src = dataCard.link;
+  elementBigImage.alt = dataCard.name;
+  elementBigImage.src = dataCard.link;
 
   openPopup(popupImage);
 }
@@ -116,10 +91,10 @@ const generateCard = (dataCard) => {
   deleteCardElement.addEventListener('click', handleDeleteCard);
   const likeCardElement = newCard.querySelector('.element__like');
   likeCardElement.addEventListener('click', handleLikeCard);
-  imageElement.addEventListener('click', openCardPopup);
- 
-  imageElement.addEventListener('click', function () {
-    openBigImage.src = imageElement.src;
+  imageElement.addEventListener('click', () => {
+    openCardPopup(dataCard);
+
+    elementBigImage.src = imageElement.src;
     nameBigImage.textContent = titleElement.textContent;
   });
 
@@ -137,10 +112,10 @@ const handleLikeCard = (event) => {
 // Функция отправки событий - кнопка Создать карточку
 function handleFormAddSubmit (event) {
   event.preventDefault();
-  renderCard({ name: addTitle.value, link: addLink.value })
-  addTitle.value = '';
-  addLink.value = '';
- 
+  renderCard({ name: cardTitle.value, link: cardLink.value })
+  cardTitle.value = '';
+  cardLink.value = '';
+  
   closePopup (popupAdd);
 };
 
@@ -148,7 +123,7 @@ popupCreateCard.addEventListener('click', handleFormAddSubmit);
 
 // Добавление карточек
 const renderCard = (dataCard) => {
-  cardsList.prepend(generateCard(dataCard));
+  cardsContainer.prepend(generateCard(dataCard));
 };
 
 // Рендер карточек
