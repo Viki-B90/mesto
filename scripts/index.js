@@ -31,6 +31,8 @@ const openPopup = function (popup) {
 function openPropfilePopup() { 
   userName.value = profileName.textContent;
   userInfo.value = profileInfo.textContent;
+  
+  openPopup(popupEdit);
 } 
 
 // Функция закрытия 3х попапов
@@ -39,10 +41,8 @@ const closePopup = function (popup) {
 }
 
 // Обработчики открытия попапов
-popupEditOpenButton.addEventListener('click', function() {
-  openPopup(popupEdit);
-  openPropfilePopup();
-});
+popupEditOpenButton.addEventListener('click', openPropfilePopup);
+
 popupAddOpenButton.addEventListener('click', function() {
   openPopup(popupAdd);
 });
@@ -93,9 +93,6 @@ const generateCard = (dataCard) => {
   likeCardElement.addEventListener('click', handleLikeCard);
   imageElement.addEventListener('click', () => {
     openCardPopup(dataCard);
-
-    elementBigImage.src = imageElement.src;
-    nameBigImage.textContent = titleElement.textContent;
   });
 
   return newCard;
