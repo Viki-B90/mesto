@@ -21,11 +21,13 @@ const cardTitle = document.querySelector('.popup__input_type_title');
 const cardLink = document.querySelector('.popup__input_type_link');
 const cardsContainer = document.querySelector('.elements__list');
 const cardTemplate = document.querySelector('#card-template').content.querySelector('.element');
-const popupCreateCard = popupAdd.querySelector('.popup__save_new_place');
+const popupCreateCard = popupAdd.querySelector('.popup__save');
 
 // Функция открытия 3х попапов
 const openPopup = function (popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closeByEsc);
+  document.addEventListener('click', closePopupByClickOnOverlay);
 }
 
 function openPropfilePopup() { 
@@ -38,6 +40,22 @@ function openPropfilePopup() {
 // Функция закрытия 3х попапов
 const closePopup = function (popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closeByEsc);
+}
+
+// Функция закрытия по оверлею
+const closePopupByClickOnOverlay = function (event) {
+  console.log (event.target, event.currentTarget);
+  if (event.target.classList.contains('popup_opened')) {
+    closePopup(event.target);
+  }
+}
+
+// Закрытие по нажатию Esc
+const closeByEsc = (event) => {
+  if (event.key === 'Escape') {
+    closePopup(document.querySelector('.popup_opened'));
+  }
 }
 
 // Обработчики открытия попапов
@@ -112,7 +130,7 @@ function handleFormAddSubmit (event) {
   renderCard({ name: cardTitle.value, link: cardLink.value })
   cardTitle.value = '';
   cardLink.value = '';
-  
+ 
   closePopup (popupAdd);
 };
 
