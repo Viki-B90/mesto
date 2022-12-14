@@ -30,7 +30,7 @@ const openPopup = function (popup) {
   document.addEventListener('click', closePopupByClickOnOverlay);
 }
 
-function openPropfilePopup() { 
+function openProfilePopup() { 
   userName.value = profileName.textContent;
   userInfo.value = profileInfo.textContent;
   
@@ -41,6 +41,7 @@ function openPropfilePopup() {
 const closePopup = function (popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closeByEsc);
+  document.removeEventListener('click', closePopupByClickOnOverlay);
 }
 
 // Функция закрытия по оверлею
@@ -59,10 +60,17 @@ const closeByEsc = (event) => {
 }
 
 // Обработчики открытия попапов
-popupEditOpenButton.addEventListener('click', openPropfilePopup);
+popupEditOpenButton.addEventListener('click', function() {
+  openProfilePopup();
+  deleteInputError();
+  deleteSpanError();
+});
 
 popupAddOpenButton.addEventListener('click', function() {
   openPopup(popupAdd);
+  formAdd.reset();
+  deleteInputError();
+  deleteSpanError();
 });
 
 // Обработчики закрытия попапов
@@ -94,6 +102,22 @@ const openCardPopup = function (dataCard) {
   elementBigImage.src = dataCard.link;
 
   openPopup(popupImage);
+}
+
+// Удаляем ошибку инпута при открытии
+function deleteInputError() {
+  const popupInputError = Array.from(document.querySelectorAll('.popup__input'));
+  popupInputError.forEach((errorInput) => {
+    errorInput.classList.remove('popup__input_type_error');
+  })
+}
+
+// Удаляем ошибку спана при открытии
+function deleteSpanError() {
+  const popupSpanError = Array.from(document.querySelectorAll('.popup__error'));
+  popupSpanError.forEach((errorSpan) => {
+    errorSpan.textContent = '';
+  })
 }
 
 // Генерация карточек
@@ -128,10 +152,10 @@ const handleLikeCard = (event) => {
 function handleFormAddSubmit (event) {
   event.preventDefault();
   renderCard({ name: cardTitle.value, link: cardLink.value })
-  cardTitle.value = '';
-  cardLink.value = '';
- 
+
   closePopup (popupAdd);
+  popupCreateCard.classList.add('popup__save_disabled');
+  popupCreateCard.disabled = 'disabled';
 };
 
 popupCreateCard.addEventListener('click', handleFormAddSubmit);
