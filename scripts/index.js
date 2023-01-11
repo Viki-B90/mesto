@@ -1,29 +1,9 @@
+import { popupEdit, popupEditCloseButton, popupEditOpenButton, formEdit, userName, userInfo, profileName,
+  profileInfo, popupAdd, popupAddOpenButton, popupAddCloseButton, popupImageCloseButton, formAdd, cardTitle,
+  cardLink, cardsContainer, popupCreateCard } from "./utils.js";
 import { Card } from "./Card.js";
-import { FormValidator, configValidation, deleteInputError, deleteSpanError } from "./FormValidator.js";
 import { initialCards } from "./cards.js";
-
-
-// Объявляем переменные
-export const popupImage = document.querySelector('.popup_img');
-export const elementBigImage = document.querySelector('.popup__image');
-
-const popupEdit = document.querySelector('.popup_edit');
-const popupEditCloseButton = document.querySelector('.popup__close');
-const popupEditOpenButton = document.querySelector('.profile__edit');
-const formEdit = document.querySelector('.popup__form');
-const userName = document.querySelector('.popup__input_type_name');
-const userInfo = document.querySelector('.popup__input_type_info');
-const profileName = document.querySelector('.profile__info_type_name');
-const profileInfo = document.querySelector('.profile__info_type_about-me');
-const popupAdd = document.querySelector('.popup_add');
-const popupAddOpenButton = document.querySelector('.profile__add');
-const popupAddCloseButton = popupAdd.querySelector('.popup__close');
-const popupImageCloseButton = popupImage.querySelector('.popup__close');
-const formAdd = document.querySelector('.popup__form_new_place');
-const cardTitle = document.querySelector('.popup__input_type_title');
-const cardLink = document.querySelector('.popup__input_type_link');
-const cardsContainer = document.querySelector('.elements__list');
-const popupCreateCard = popupAdd.querySelector('.popup__save');
+import { FormValidator, configValidation, deleteInputError, deleteSpanError } from "./FormValidator.js";
 
 // Функция открытия 3х попапов
 export const openPopup = function (popup) {
@@ -43,7 +23,7 @@ function openProfilePopup() {
 const closePopup = function (popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closeByEsc);
-  document.removeEventListener('click', closePopupByClickOnOverlay);
+  document.removeEventListener('mousedown', closePopupByClickOnOverlay);
 }
 
 // Функция закрытия по оверлею

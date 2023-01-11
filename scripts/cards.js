@@ -1,4 +1,4 @@
-export const initialCards = ([
+export const initialCards = [
   {
     name: 'Сулакский каньон',
     link: './images/sulakskij-kanon.jpg'
@@ -23,4 +23,4 @@ export const initialCards = ([
     name: 'Байкал',
     link: './images/baikal.jpg'
   }
-]);
+];

@@ -1,4 +1,5 @@
-import { openPopup, popupImage, elementBigImage } from "./index.js";
+import { popupImage, elementBigImage } from "./utils.js";
+import { openPopup } from "./index.js";
 
 export class Card {
   constructor(data, templateSelector) {
@@ -31,7 +32,8 @@ export class Card {
   }
 
   _handleDeleteCard() {
-    this._element.remove()
+    this._element.remove();
+    this._element = null;
   }
 
   _handleLikeCard() {
