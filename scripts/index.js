@@ -1,45 +1,9 @@
 import { popupEdit, popupEditCloseButton, popupEditOpenButton, formEdit, userName, userInfo, profileName,
   profileInfo, popupAdd, popupAddOpenButton, popupAddCloseButton, popupImageCloseButton, formAdd, cardTitle,
-  cardLink, cardsContainer, popupCreateCard } from "./utils.js";
+  cardLink, cardsContainer, popupCreateCard, openPopup, openProfilePopup, closePopup } from "./utils.js";
 import { Card } from "./Card.js";
 import { initialCards } from "./cards.js";
 import { FormValidator, configValidation, deleteInputError, deleteSpanError } from "./FormValidator.js";
-
-// Функция открытия 3х попапов
-export const openPopup = function (popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closeByEsc);
-  document.addEventListener('click', closePopupByClickOnOverlay);
-}
-
-function openProfilePopup() { 
-  userName.value = profileName.textContent;
-  userInfo.value = profileInfo.textContent;
-  
-  openPopup(popupEdit);
-} 
-
-// Функция закрытия 3х попапов
-const closePopup = function (popup) {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closeByEsc);
-  document.removeEventListener('mousedown', closePopupByClickOnOverlay);
-}
-
-// Функция закрытия по оверлею
-const closePopupByClickOnOverlay = function (event) {
-  console.log (event.target, event.currentTarget);
-  if (event.target.classList.contains('popup_opened')) {
-    closePopup(event.target);
-  }
-}
-
-// Закрытие по нажатию Esc
-const closeByEsc = (event) => {
-  if (event.key === 'Escape') {
-    closePopup(document.querySelector('.popup_opened'));
-  }
-}
 
 // Обработчики открытия попапов
 popupEditOpenButton.addEventListener('click', function() {
