@@ -1,5 +1,5 @@
 import { popupEdit, popupEditCloseButton, popupEditOpenButton, formEdit, userName, userInfo, profileName,
-  profileInfo, popupAdd, popupAddOpenButton, popupAddCloseButton, popupImageCloseButton, formAdd, cardTitle,
+  profileInfo, popupAdd, popupAddOpenButton, popupAddCloseButton, popupImage, popupImageCloseButton, formAdd, cardTitle,
   cardLink, cardsContainer, popupCreateCard, openPopup, openProfilePopup, closePopup } from "./utils.js";
 import { Card } from "./Card.js";
 import { initialCards } from "./cards.js";
