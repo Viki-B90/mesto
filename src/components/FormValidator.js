@@ -1,25 +1,25 @@
-export class FormValidator {
-  constructor(settings, form) {
-    this._form = form;
+export default class FormValidator {
+  constructor(settings, formSelector) {
+    this._formSelector = formSelector;
     this._inputSelector = settings.inputSelector;
     this._submitButtonSelector = settings.submitButtonSelector;
     this._inactiveButtonClass = settings.inactiveButtonClass;
     this._inputErrorClass = settings.inputErrorClass;
     this._errorClass = settings.errorClass;
 
-    this._inputList = Array.from(form.querySelectorAll(this._inputSelector));
-    this._buttonElement = form.querySelector(this._submitButtonSelector);
+    this._inputList = Array.from(formSelector.querySelectorAll(this._inputSelector));
+    this._buttonElement = formSelector.querySelector(this._submitButtonSelector);
   }
 
   _showInputError = (inputElement, errorMessage) => {
-    const errorElement = this._form.querySelector(`.${inputElement.id}-error`);
+    const errorElement = this._formSelector.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add(this._inputErrorClass);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(this._errorClass);
   };
 
   _hideInputError = (inputElement) => {
-    const errorElement = this._form.querySelector(`.${inputElement.id}-error`);
+    const errorElement = this._formSelector.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.remove(this._inputErrorClass);
     errorElement.classList.remove(this._errorClass);
     errorElement.textContent = '';
@@ -60,36 +60,30 @@ export class FormValidator {
     });
   };
 
+  _deleteInputError = () => {
+    const popupInputError = Array.from(document.querySelectorAll('.popup__input'));
+    popupInputError.forEach((errorInput) => {
+      errorInput.classList.remove('popup__input_type_error');
+    });
+  };
+  
+  _deleteSpanError = () => {
+    const popupSpanError = Array.from(document.querySelectorAll('.popup__error'));
+    popupSpanError.forEach((errorSpan) => {
+      errorSpan.textContent = '';
+    });
+  };
+
+  deleteError = () => {
+    this._deleteInputError();
+    this._deleteSpanError()
+  };
+
   enableValidation = () => {
-    this._form.addEventListener('submit', (evt) => {
+    this._formSelector.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });
   
     this._setEventListeners();
   }; 
 };
-
-export const configValidation = ({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__save',
-  inactiveButtonClass: 'popup__save_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-});
-
-//Удаляем ошибку инпута при открытии
-export function deleteInputError() {
-  const popupInputError = Array.from(document.querySelectorAll('.popup__input'));
-  popupInputError.forEach((errorInput) => {
-    errorInput.classList.remove('popup__input_type_error');
-  })
-}
-
-// Удаляем ошибку спана при открытии
-export function deleteSpanError() {
-  const popupSpanError = Array.from(document.querySelectorAll('.popup__error'));
-  popupSpanError.forEach((errorSpan) => {
-    errorSpan.textContent = '';
-  })
-}
