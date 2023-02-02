@@ -24,3 +24,12 @@ export const initialCards = [
     link: 'https://do-slez.com/uploads/posts/2018-02/1518354245_8507c5cb6ce99df96b69a4463a3819fd_b53ab1de81e8a6edf7fc36196ab65e26.jpg'
   }
 ];
+
+export const configValidation = ({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save',
+  inactiveButtonClass: 'popup__save_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+});

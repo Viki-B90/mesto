@@ -1,15 +1,20 @@
-import {  
+import {
+  popupEdit,
+  popupAdd,
+  popupImage,
   popupEditOpenButton, 
   userName, 
-  userInfo, 
+  userInfo,
+  profileInfo,
+  profileName,
   popupAddOpenButton,
   formProfile,
   formCard,
-  configValidation,
-  cardsContainer
+  cardsContainer,
+  templateSelector
   } from '../utils/utils.js';
 import Card from '../components/Card.js';
-import { initialCards } from '../utils/cards.js';
+import { initialCards, configValidation } from '../utils/constants.js';
 import FormValidator from '../components/FormValidator.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
@@ -39,25 +44,71 @@ const images = [
 
 //Новый класс данных профиля
 const userInf = new UserInfo({
-  nameSelector: '.profile__info_type_name',
-  infoSelector: '.profile__info_type_about-me'
+  nameSelector: profileName,
+  infoSelector: profileInfo
 });
 
 //Новый класс профиля
 const profileEditPopup = new PopupWithForm({
-  popupSelector: '.popup_edit',
+  popupSelector: popupEdit,
   handleFormSubmit: (data) => {
     userInf.setUserInfo(data);
   },
 });
 
-profileEditPopup.setEventListeners();
+// Новый класс карточек - Создать новое место
+const newCardPopup = new PopupWithForm({
+  popupSelector: popupAdd,
+  handleFormSubmit: (item) => {
+    const card = renderCard(item);
+    cardsSection.addItem(card);
+    newCardPopup.close();
+  }
+});
 
+// Новый класс секция карточки
+const cardsSection = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    cardsSection.addItem(renderCard(item));
+    },
+  },
+  cardsContainer
+);
+
+cardsSection.renderItems();
+
+// Экземпляр попапа большой картинки
+const imgPopup = new PopupWithImage(popupImage);
+
+// Экземпляры класса валидации
+const formProfileValidation = new FormValidator(configValidation, formProfile);
+formProfileValidation.enableValidation();
+
+const formCardValidation = new FormValidator(configValidation, formCard);
+formCardValidation.enableValidation();
+
+// Обработчик попап Профиля
 function handleFormEditSubmit(event) {
   event.preventDefault();
 
   profileEditPopup.close();
 }
+
+// Создание карточек
+function renderCard(data) {
+  const card = new Card(data, templateSelector, handleCardClick);
+  const cardElement = card.generateCard();
+
+  return cardElement;
+}
+
+function handleCardClick(name, link) {
+  imgPopup.open(name, link)
+}
+
+// Слушатели для попапа Профиля
+profileEditPopup.setEventListeners();
 
 formProfile.addEventListener('submit', handleFormEditSubmit);
 
@@ -72,57 +123,14 @@ popupEditOpenButton.addEventListener('click', () => {
   formProfileValidation.deleteError();
 })
 
-// Новый класс карточек - Создать новое место
-const newCardPopup = new PopupWithForm({
-  popupSelector: '.popup_add',
-  handleFormSubmit: (item) => {
-    const card = renderCard(item);
-    cardsSection.addItem(card);
-    newCardPopup.close();
-  }
-});
-
+// Слушатели для попапа "Место"
 newCardPopup.setEventListeners();
 
-// Новый класс секция карточки
-const cardsSection = new Section({
-  items: initialCards,
-  renderer: (item) => {
-    cardsSection.addItem(renderCard(item));
-    },
-  },
-  cardsContainer
-);
-
-cardsSection.renderItems();
-
-// Создание карточек
-function renderCard(data) {
-  const card = new Card(data, '#card-template', handleCardClick);
-  const cardElement = card.generateCard();
-
-  return cardElement;
-}
-
-function handleCardClick(name, link) {
-  imgPopup.open(name, link)
-}
-
-// слушатель для попапа "Место"
 popupAddOpenButton.addEventListener('click', () => {
   newCardPopup.open();
   formCardValidation._toggleButtonState();
   formCardValidation.deleteError();
 });
 
-// Экземпляр попапа большой картинки
-const imgPopup = new PopupWithImage('.popup_img');
-
+// Слушатель попапа большой картинки
 imgPopup.setEventListeners();
-
-// Экземпляры класса валидации
-const formProfileValidation = new FormValidator(configValidation, formProfile);
-formProfileValidation.enableValidation();
-
-const formCardValidation = new FormValidator(configValidation, formCard);
-formCardValidation.enableValidation();
