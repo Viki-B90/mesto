@@ -1,9 +1,17 @@
 export default class Card {
-  constructor(data, templateSelector, handleCardClick) {
+  constructor({data, templateSelector, userId, handleCardClick, handleLikeClick, handleDeleteLike, handleDeleteIconClick}) {
     this._title = data.name;
     this._image = data.link;
+    this._likes = data.likes;
+    this._id = data._id;
+    this._owner = data.owner;
+    this._ownerId = data.owner._id;
+    this._userId = userId;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._handleLikeClick = handleLikeClick;
+    this._handleDeleteLike = handleDeleteLike;
+    this._handleDeleteIconClick = handleDeleteIconClick;
   }
 
   _getTemplate() {
@@ -20,31 +28,64 @@ export default class Card {
     this._element = this._getTemplate();
     this._setEventListeners();
 
-    const titleElement = this._element.querySelector('.element__title');
     const imageElement = this._element.querySelector('.element__image');
-    titleElement.textContent = this._title;
     imageElement.alt = this._title;
     imageElement.src = this._image;
+    this._element.querySelector('.element__title').textContent = this._title;
+    this._element.querySelector('.element__counter-like').textContent = this._likes.length; 
+
+    this._deleteBasket();
+    this.setLikeCounter();
 
     return this._element;
   }
 
-  _handleDeleteCard() {
+  _deleteBasket() {
+    if (this._ownerId !== this._userId) {
+      this._element.querySelector('.element__delete').remove();
+    }
+  }
+
+  removeCard() {
     this._element.remove();
     this._element = null;
   }
 
-  _handleLikeCard() {
-    this._element.querySelector('.element__like').classList.toggle('element__like_active')
+  _checkUserLikes() {
+    return this._likes.find(like => like._id === this._userId);
+  }
+
+  setLike() {
+    this._element.querySelector('.element__like').classList.add('element__like_active');
+  }
+
+  unsetLike() {
+    this._element.querySelector('.element__like').classList.remove('element__like_active');
+  }
+
+  setLikeCounter() {
+    if (this._checkUserLikes()) {
+      this.setLike();
+    } else {
+      this.unsetLike();
+    }
+  }
+
+  getLikesCounter(res) {
+    this._element.querySelector('.element__counter-like').textContent = res.likes.length;
   }
 
   _setEventListeners() {
     this._element.querySelector('.element__delete').addEventListener('click', () => {
-      this._handleDeleteCard();
+      this._handleDeleteIconClick(this._id);
     });
 
     this._element.querySelector('.element__like').addEventListener('click', () => {
-      this._handleLikeCard();
+      if (this._element.querySelector('.element__like').classList.contains('element__like_active')) {
+        this._handleDeleteLike();
+      } else {
+        this._handleLikeClick();
+      }
     });
 
     this._element.querySelector('.element__image').addEventListener('click', () => {

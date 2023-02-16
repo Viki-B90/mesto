@@ -15,3 +15,4 @@
 Просмотреть проект можно по ссылке на GitHub Pages:
 
 [Ссылка на проект](https://viki-b90.github.io/mesto/)
+[Ссылка на проект gh-pages](https://github.com/Viki-B90/mesto.git)

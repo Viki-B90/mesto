@@ -60,30 +60,18 @@ export default class FormValidator {
     });
   };
 
-  _deleteInputError = () => {
-    const popupInputError = Array.from(document.querySelectorAll('.popup__input'));
-    popupInputError.forEach((errorInput) => {
-      errorInput.classList.remove('popup__input_type_error');
-    });
-  };
-  
-  _deleteSpanError = () => {
-    const popupSpanError = Array.from(document.querySelectorAll('.popup__error'));
-    popupSpanError.forEach((errorSpan) => {
-      errorSpan.textContent = '';
-    });
-  };
-
   deleteError = () => {
-    this._deleteInputError();
-    this._deleteSpanError()
+    this._toggleButtonState();
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement);
+    })
   };
 
   enableValidation = () => {
-    this._formSelector.addEventListener('submit', (evt) => {
-      evt.preventDefault();
+    this._formSelector.addEventListener('submit', (event) => {
+      event.preventDefault();
     });
   
     this._setEventListeners();
-  }; 
+  };
 };
