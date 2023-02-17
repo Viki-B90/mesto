@@ -4,18 +4,20 @@ class Api {
     this._headers = headers;
   }
 
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject (`Ошибка: ${res.status}`);
+  }
+
   // Получаем данные пользователя
   getUserProfile() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
       headers: this._headers,
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then(this._checkResponse);
   }
 
   // Получаем информации о пользователе
@@ -28,12 +30,7 @@ class Api {
         about: data.about
       })
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then(this._checkResponse);
   }
 
   // Обновление аватара
@@ -45,12 +42,7 @@ class Api {
         avatar: data.avatar,
       })
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then(this._checkResponse);
   }
 
   // Загрузка карточек
@@ -59,12 +51,7 @@ class Api {
       method: 'GET',
       headers: this._headers,
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then(this._checkResponse);
   }
 
   // Добавление новой карточки
@@ -77,12 +64,7 @@ class Api {
         link: data.link
       })
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then(this._checkResponse);
   }
 
   // Удаление карточки
@@ -91,12 +73,7 @@ class Api {
       method: 'DELETE',
       headers: this._headers,
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then(this._checkResponse);
   }
 
   // Поставить лайк на карточку
@@ -105,12 +82,7 @@ class Api {
       method: 'PUT',
       headers: this._headers,
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then(this._checkResponse);
   }
 
   // Снять лайк с карточки
@@ -119,12 +91,7 @@ class Api {
       method: 'DELETE',
       headers: this._headers,
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then(this._checkResponse);
   }
 }
 

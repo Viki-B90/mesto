@@ -32,7 +32,11 @@ export default class Card {
     imageElement.alt = this._title;
     imageElement.src = this._image;
     this._element.querySelector('.element__title').textContent = this._title;
-    this._element.querySelector('.element__counter-like').textContent = this._likes.length; 
+
+    this._likeCounter = this._element.querySelector('.element__counter-like');
+    this._likeCounter.textContent = this._likes.length;
+
+    this._likeButton = this._element.querySelector('.element__like');
 
     this._deleteBasket();
     this.setLikeCounter();
@@ -56,11 +60,11 @@ export default class Card {
   }
 
   setLike() {
-    this._element.querySelector('.element__like').classList.add('element__like_active');
+    this._likeButton.classList.add('element__like_active');
   }
 
   unsetLike() {
-    this._element.querySelector('.element__like').classList.remove('element__like_active');
+    this._likeButton.classList.remove('element__like_active');
   }
 
   setLikeCounter() {
@@ -72,7 +76,7 @@ export default class Card {
   }
 
   getLikesCounter(res) {
-    this._element.querySelector('.element__counter-like').textContent = res.likes.length;
+    this._likeCounter.textContent = res.likes.length;
   }
 
   _setEventListeners() {
@@ -81,7 +85,7 @@ export default class Card {
     });
 
     this._element.querySelector('.element__like').addEventListener('click', () => {
-      if (this._element.querySelector('.element__like').classList.contains('element__like_active')) {
+      if (this._likeButton.classList.contains('element__like_active')) {
         this._handleDeleteLike();
       } else {
         this._handleLikeClick();
